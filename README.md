@@ -1,2 +1,2 @@
-# webt-2300
-Code Examples for WEBT 2300 - Client-Side Programming in JavaScript
+# WEBT-2300 - Client-Side Programming in JavaScript
+This repository contains code for labs and example projects
