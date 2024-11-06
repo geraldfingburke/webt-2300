@@ -1,5 +1,5 @@
 $(document).ready(()=>{
-    let results, question, correctAnswer, answers;
+    let results, question, correctAnswer, answers, selectedAnswer;
     let numberOfQuestions = 10;
     let score = 0;
     let index = 0;
@@ -8,62 +8,86 @@ $(document).ready(()=>{
         data = JSON.parse(response);
         results = data.results;
         startGame();
-        $("#answer-1").on("click", () => {
-            checkAnswer();
-        });
+    });
+
+    $("#start-game-button").text("Start Game");
+    $("#start-game-button").on("click", () => {
+        startGame();
     });
 
     function startGame() {
         nextQuestion();
+        $("#question-div").show();
+        $("#start-game-button").hide();
     }
 
-    function nextQuestion() {
+    async function nextQuestion() {
+        clearAnswers();
+        selectedAnswer = "";
         question = results[index].question;
         correctAnswer = results[index].correct_answer;
         answers = results[index].incorrect_answers;
         answers.push(correctAnswer);
         let candidates = [1, 2, 3, 4];
         for(let i = 0; i < answers.length; i++) {
-            console.log(candidates);
-            console.log(answers);
             const random = Math.floor(Math.random() * (candidates.length));
             const candidate = candidates[random];
-            console.log(random);
-            console.log(candidate);
-            $(`#answer-${candidate}`).text(answers[i]);
+            $(`#answer-${candidate}`).html(answers[i]);
+            $(`#answer-${candidate}`).on("click", () => {
+                selectedAnswer = answers[i];
+                clearAnswers();
+                $(`#answer-${candidate}`).css("background-color", "#b0b0b0");
+            });
             candidates.splice(candidates.indexOf(candidate), 1);
         }
         display();
+        await setTimer(10).then(() => {
+            checkAnswer(selectedAnswer);
+        });
     }
 
-    function checkAnswer() {
-        if (true) {
+    async function checkAnswer(answer) {
+        index++;
+        if (answer == correctAnswer) {
             score++;
             display();
+            $("#question-tag").text("Correct!");
         }
-        index++;
+        else {
+            $("#question-tag").html(`Sorry! The correct answer was: ${correctAnswer}`);
+        }
+        await setTimer(2).then();
         if(index < numberOfQuestions) {
             nextQuestion();
+        }
+        else {
+            endGame();
         }
     }
 
     function display() {
-        // if(tag == "question") {
-        //     $("#question-tag").text(text);
-        // }
-        // else 
-        // {
-        //     $("#score-tag").text(text);
-        // }
-        $("#question-tag").text(question);
+        $("#question-tag").html(question);
         $("#score-tag").text(score);
     }
 
-    async function setTimer(second) {
-
+    function clearAnswers() {
+        for(i = 1; i <= 4; i++) {
+            $(`#answer-${i}`).css("background-color", "#cfcfcf");
+        }
     }
 
-    function select(element) {
+    async function setTimer(seconds) {
+        return new Promise((resolve) => {
+            setTimeout(resolve, seconds * 1000);
+        }); 
+    }
 
+    function endGame() {
+        $("#question-div").hide();
+        $("#question-tag").text(`Congratulations, you got a score of ${score} out of ${numberOfQuestions}! Do you want to try again?`);
+        $("#start-game-button").text("Play Again?");
+        $("#start-game-button").show();
+        score = 0;
+        index = 0;
     }
 });
