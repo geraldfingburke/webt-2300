@@ -7,7 +7,7 @@ This repository contains code for labs and example projects
 - [Lab 04 - Advice Generator](https://geraldburke.com/gwburke/Lab04/advice-generator/)
 - [Lab 05 - Pair Programming Exercise](https://geraldburke.com/gwburke/Lab05/met-art/)
 - [Lab 06 - The Promises Game](https://geraldburke.com/gwburke/Lab06/promises-trivia/)
-- [Lab 07 - The Kitchen Sink App]([#](https://geraldburke.com/gwburke/Lab07/gregs-spaghetti-corner/))
+- [Lab 07 - The Kitchen Sink App](https://geraldburke.com/gwburke/Lab07/gregs-spaghetti-corner/)
 - [Lab 08 - The Easter Egg Event](#)
 - [Lab 09 - Conducting User Testing](#)
 - [Lab 10 - Implementing Testing Feedback](#)
