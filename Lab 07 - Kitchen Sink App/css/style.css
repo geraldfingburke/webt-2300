@@ -44,12 +44,52 @@ body {
 .ticker-item {
   display: inline-block;
   padding: 0 2rem;
+  color: rgb(114, 216, 114) !important;
 }
 
 .isUp {
-    color: rgb(114, 216, 114) !important;
+  color: rgb(114, 216, 114) !important;
 }
 
 .isDown {
     color: rgb(255, 0, 0) !important;
+}
+
+@font-face {
+    font-family: 'zombie';
+    src: url('../fonts/Curse of the Zombie.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'punk';
+  src: url("../fonts/Punk Typewriter.otf");
+}
+
+@font-face {
+  font-family: 'code';
+  src: url("../fonts/Code.ttf");
+}
+
+.punk-font {
+  font-family: 'punk';
+  font-size: 30px;
+}
+
+.zombie-font {
+    font-family: 'zombie';
+}
+
+p, li {
+  font-family: 'code';
+  font-size: 25px;
+}
+
+#joke {
+  min-height: 300px !important;
+}
+
+#joke-button {
+  background-color: black;
+  color: rgb(114, 216, 114) !important;
+  font-family: 'code';
 }

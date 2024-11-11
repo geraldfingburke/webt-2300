@@ -11,7 +11,9 @@ $(document).ready(() => {
         for(let i = 0; i < 10; i++) {
             $(document).load(`https://hacker-news.firebaseio.com/v0/item/${items[i]}.json?print=pretty`, (story_response) => {
                 story = JSON.parse(story_response);
-                const tickerItem = $("<div class='ticker-item'></div>").text(story.title);
+                const tickerItem = $("<a class='ticker-item'></a>").text(story.title);
+                tickerItem.attr("href", story.url);
+                tickerItem.attr("target", "_blank");
                 $("#ticker-transition").append(tickerItem);
             });
         }
@@ -29,7 +31,7 @@ $(document).ready(() => {
     $(document).load("https://api.coincap.io/v2/assets", (response) => {
         const data = JSON.parse(response).data;
 
-        for(i = 0; i < 10; i++) {
+        for(i = 0; i < 30; i++) {
             const coin = data[i].symbol;
             const price = Number.parseFloat(data[i].priceUsd).toFixed(2);
             const isDown = data[i].changePercent24Hr.charAt(0) == '-';
